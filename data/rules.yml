@@ -1,7 +1,7 @@
 version: "3.1"
 
 rules:
-
+#DEAFULT
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye
@@ -11,3 +11,28 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+- rule: Handle greeting
+  steps:
+    - intent: greet
+    - action: action_greet
+
+- rule: Handle option 1 (Raise complaint)
+  steps:
+    - intent: option_complaint
+    - action: action_complaint
+
+- rule: Handle option 2 (Track complaint)
+  steps:
+    - intent: option_track_complaint
+    - action: action_track_complaint
+
+- rule: Handle option 3 (Suggestion)
+  steps:
+    - intent: option_suggestion
+    - action: action_suggestion
+
+- rule: Handle option 4 (Apply for service)
+  steps:
+    - intent: option_apply_service
+    - action: action_apply_service

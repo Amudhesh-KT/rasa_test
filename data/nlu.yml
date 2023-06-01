@@ -1,6 +1,8 @@
 version: "3.1"
 
 nlu:
+
+#DEFAULT:
 - intent: greet
   examples: |
     - hey
@@ -89,3 +91,32 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+
+#FOUR USE CASES:
+- intent: option_complaint
+  examples: |
+    - I want to raise a complaint
+    - Complaint
+    - Need to file a complaint
+    - I have a complaint
+
+- intent: option_track_complaint
+  examples: |
+    - How can I track my complaint?
+    - Track complaint status
+    - Check complaint progress
+    - Where can I see my complaint status?
+
+- intent: option_suggestion
+  examples: |
+    - I have a suggestion
+    - Want to share a suggestion
+    - Suggestion
+    - Feedback
+
+- intent: option_apply_service
+  examples: |
+    - I want to apply for a service
+    - Apply for service
+    - Service application
+    - How can I request a service?

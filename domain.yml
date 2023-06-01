@@ -1,6 +1,7 @@
 version: "3.1"
 
 intents:
+#DEFAULT:
   - greet
   - goodbye
   - affirm
@@ -9,9 +10,24 @@ intents:
   - mood_unhappy
   - bot_challenge
 
+#FOUR USE CASES:
+  - option_complaint
+  - option_track_complaint
+  - option_suggestion
+  - option_apply_service
+
+actions:
+#DEFAULT:
+  - action_greet
+
+#FOUR USE CASES:
+  - action_complaint
+  - action_track_complaint
+  - action_suggestion
+  - action_apply_service
+
+
 responses:
-  utter_greet:
-  - text: "Hey! How are you?"
 
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
@@ -28,6 +44,20 @@ responses:
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
+
+  utter_greet:
+    - text: "Welcome to the bot! Thanks for choosing our service."
+  utter_options:
+    - text: "Please choose one of the following options:\n1. Raise complaint\n2. Track complaint\n3. Suggestion\n4. Apply for service"
+  utter_complaint:
+    - text: "Please provide details of your complaint."
+  utter_track_complaint:
+    - text: "Please provide the complaint ID to track the status."
+  utter_suggestion:
+    - text: "Please provide your suggestion or feedback."
+  utter_apply_service:
+    - text: "Please provide the required information to apply for the service."
+
 
 session_config:
   session_expiration_time: 60
