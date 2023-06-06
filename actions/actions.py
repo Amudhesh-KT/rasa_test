@@ -293,7 +293,7 @@ class ValidateSuggestionForm(FormValidationAction):
     
 
  
-        dispatcher.utter_message(text=f"Your complaint details is {slot_value}.")
+        dispatcher.utter_message(text=f"Your suggestion is {slot_value}.")
         return {"s_suggestions": slot_value}
     
     def validate_s_attachments(
