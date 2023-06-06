@@ -220,6 +220,13 @@ class ValidateTrackComplaintForm(FormValidationAction):
  
         dispatcher.utter_message(text=f"Your comment is {slot_value}.")
         return {"t_comments": slot_value}
+    # {
+    #     "form":[
+    #         {"field":'What is your name', "type": "text"},
+    #         {"field":'What is your name', "type": "text"},
+    #         'Age',
+    #     ]
+    # }
 
 class ActionClearTrackSlots(Action):
     def name(self) -> Text:
@@ -234,7 +241,7 @@ class ActionClearTrackSlots(Action):
 #****************************************SUGGESTIONS**********************************************************
 class ValidateSuggestionForm(FormValidationAction):
     def name(self) -> Text:
-        return "validate_suggesstion_form"
+        return "validate_suggestion_form"
 
     def validate_r_username(
         self,
@@ -304,7 +311,7 @@ class ValidateSuggestionForm(FormValidationAction):
     
 class ActionClearSuggestionSlots(Action):
     def name(self) -> Text:
-        return "action_clear_suggestions_slots"
+        return "action_clear_suggestion_slots"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         slots_to_clear = ["r_username", "r_email", "r_location", "s_suggestions", "s_attachments"]

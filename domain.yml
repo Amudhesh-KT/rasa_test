@@ -294,9 +294,9 @@ actions:
 #****************************************TRACK COMPLAINT******************************************************
 
 #****************************************SUGGESTIONS**********************************************************
-- utter_suggesstion_slot
+- utter_suggestion_slot
 - utter_suggestion_submit
-- validate_suggesstion_form
+- validate_suggestion_form
 - action_clear_suggestion_slots
 #****************************************SUGGESTIONS**********************************************************
 
