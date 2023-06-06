@@ -51,16 +51,16 @@ entities:
 #****************************************TRACK COMPLAINT******************************************************
 
 #****************************************SUGGESTIONS**********************************************************
-  - s_username:
-      type: regex
-      pattern: "^[a-zA-Z0-9_-]{5,25}$"
-  - s_email:
-      type: regex
-      pattern: "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+"
-  - s_location:
-      type: text
-      pattern: "^[a-zA-Z0-9_-]{5,25}$"
-  - s_complaint_details:
+  # - s_username:
+  #     type: regex
+  #     pattern: "^[a-zA-Z0-9_-]{5,25}$"
+  # - s_email:
+  #     type: regex
+  #     pattern: "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+"
+  # - s_location:
+  #     type: text
+  #     pattern: "^[a-zA-Z0-9_-]{5,25}$"
+  - s_suggestions:
       type: regex
       pattern: "^[a-zA-Z0-9_-]{5,100}$"
   - s_attachments:
@@ -116,30 +116,30 @@ slots:
 #****************************************TRACK COMPLAINT******************************************************
 
 #****************************************SUGGESTIONS**********************************************************
-  s_username:
+  # s_username:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: s_username
+  # s_email:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: s_email
+  # s_location:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: s_location
+  s_suggestions:
     type: text
     influence_conversation: true
     mappings:
     - type: from_entity
-      entity: s_username
-  s_email:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: s_email
-  s_location:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: s_location
-  s_complaint_details:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: s_complaint_details
+      entity: s_suggestions
   s_attachments:
     type: text
     influence_conversation: true
@@ -169,10 +169,10 @@ forms:
 #****************************************SUGGESTIONS**********************************************************
   suggestion_form:
     required_slots:
-      - s_username
-      - s_email
-      - s_location
-      - s_complaint_details
+      - r_username
+      - r_email
+      - r_location
+      - s_suggestions
       - s_attachments
 #****************************************SUGGESTIONS**********************************************************
 
@@ -259,7 +259,7 @@ responses:
   - text: tell me your location?
 
   utter_ask_s_complaint_details:
-  - text: tell me complaint details
+  - text: Give suggestions if any
 
   utter_ask_s_attachments:
   - text: give any attachment
@@ -268,7 +268,7 @@ responses:
   - text: I will raise a suggestion for you!
 
   utter_suggestion_slots:
-  - text: The slots are {s_username} {s_email} {s_location} {s_complaint_details} {s_attachments}.
+  - text: The slots are {r_username} {r_email} {r_location} {s_sugestions} {s_attachments}.
 #****************************************SUGGESTIONS**********************************************************
 
 actions:
@@ -283,18 +283,21 @@ actions:
 - utter_complaint_slots
 - utter_submit
 - validate_raise_complaint_form
+- action_clear_complaint_slots
 #****************************************RAISE_COMPLAINT****************************************************
 
 #****************************************TRACK COMPLAINT******************************************************
 - utter_track_complaint_slot
 - utter_track_submit
 - validate_track_complaint_form
+- action_clear_track_slots
 #****************************************TRACK COMPLAINT******************************************************
 
 #****************************************SUGGESTIONS**********************************************************
 - utter_suggesstion_slot
 - utter_suggestion_submit
 - validate_suggesstion_form
+- action_clear_suggestion_slots
 #****************************************SUGGESTIONS**********************************************************
 
 session_config:

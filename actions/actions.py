@@ -179,6 +179,15 @@ class ValidateComplaintForm(FormValidationAction):
  
         dispatcher.utter_message(text=f"Your attachments is {slot_value}.")
         return {"r_attachments": slot_value}
+    
+class ActionClearComplaintSlots(Action):
+    def name(self) -> Text:
+        return "action_clear_complaint_slots"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        slots_to_clear = ["r_username", "r_email", "r_location", "r_complaint_details", "r_attachments"]
+        slot_values = {slot: None for slot in slots_to_clear}
+        return [SlotSet(slot, value) for slot, value in slot_values.items()]
 #****************************************RAISE_COMPLAINT****************************************************    
 
 #****************************************TRACK COMPLAINT******************************************************   
@@ -211,6 +220,15 @@ class ValidateTrackComplaintForm(FormValidationAction):
  
         dispatcher.utter_message(text=f"Your comment is {slot_value}.")
         return {"t_comments": slot_value}
+
+class ActionClearTrackSlots(Action):
+    def name(self) -> Text:
+        return "action_clear_track_slots"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        slots_to_clear = ["t_complaint_number", "t_comments"]
+        slot_values = {slot: None for slot in slots_to_clear}
+        return [SlotSet(slot, value) for slot, value in slot_values.items()]
 #****************************************TRACK COMPLAINT******************************************************
 
 #****************************************SUGGESTIONS**********************************************************
@@ -218,7 +236,7 @@ class ValidateSuggestionForm(FormValidationAction):
     def name(self) -> Text:
         return "validate_suggesstion_form"
 
-    def validate_s_username(
+    def validate_r_username(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
@@ -229,9 +247,9 @@ class ValidateSuggestionForm(FormValidationAction):
 
  
         dispatcher.utter_message(text=f"Your user name is {slot_value}.")
-        return {"s_username": slot_value}
+        return {"r_username": slot_value}
     
-    def validate_s_email(
+    def validate_r_email(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
@@ -242,10 +260,10 @@ class ValidateSuggestionForm(FormValidationAction):
 
  
         dispatcher.utter_message(text=f"Your email is {slot_value}.")
-        return {"s_email": slot_value}
+        return {"r_email": slot_value}
     
 
-    def validate_s_location(
+    def validate_r_location(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
@@ -256,9 +274,9 @@ class ValidateSuggestionForm(FormValidationAction):
 
  
         dispatcher.utter_message(text=f"Your location is {slot_value}.")
-        return {"s_location": slot_value}
+        return {"r_location": slot_value}
 
-    def validate_s_complaint_details(
+    def validate_s_suggestions(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
@@ -269,7 +287,7 @@ class ValidateSuggestionForm(FormValidationAction):
 
  
         dispatcher.utter_message(text=f"Your complaint details is {slot_value}.")
-        return {"s_complaint_details": slot_value}
+        return {"s_suggestions": slot_value}
     
     def validate_s_attachments(
         self,
@@ -283,4 +301,13 @@ class ValidateSuggestionForm(FormValidationAction):
  
         dispatcher.utter_message(text=f"Your attachments is {slot_value}.")
         return {"s_attachments": slot_value}
+    
+class ActionClearSuggestionSlots(Action):
+    def name(self) -> Text:
+        return "action_clear_suggestions_slots"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        slots_to_clear = ["r_username", "r_email", "r_location", "s_suggestions", "s_attachments"]
+        slot_values = {slot: None for slot in slots_to_clear}
+        return [SlotSet(slot, value) for slot, value in slot_values.items()]
 #****************************************SUGGESTIONS**********************************************************
