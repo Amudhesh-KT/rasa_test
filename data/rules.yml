@@ -1,7 +1,7 @@
 version: "3.1"
 
 rules:
-#DEAFULT
+#****************************************DEFAULT************************************************************
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye
@@ -16,23 +16,61 @@ rules:
   steps:
     - intent: greet
     - action: action_greet
+#****************************************DEFAULT************************************************************
 
-- rule: Handle option 1 (Raise complaint)
+#****************************************RAISE_COMPLAINT****************************************************
+- rule: Activate Complaint Form
   steps:
-    - intent: option_complaint
-    - action: action_complaint
+  - intent: raise_complaint
+  - action: raise_complaint_form
+  - active_loop: raise_complaint_form
 
-- rule: Handle option 2 (Track complaint)
+- rule: Submit Complaint Form
+  condition:
+  - active_loop: raise_complaint_form
   steps:
-    - intent: option_track_complaint
-    - action: action_track_complaint
+  - action: raise_complaint_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_submit
+  - action: utter_complaint_slots
+#****************************************RAISE_COMPLAINT****************************************************
 
-- rule: Handle option 3 (Suggestion)
+#****************************************TRACK COMPLAINT******************************************************
+- rule: Activate Complaint track Form
   steps:
-    - intent: option_suggestion
-    - action: action_suggestion
+  - intent: track_complaint
+  - action: track_complaint_form
+  - active_loop: track_complaint_form
 
-- rule: Handle option 4 (Apply for service)
+- rule: Submit Track Complaint Form
+  condition:
+  - active_loop: track_complaint_form
   steps:
-    - intent: option_apply_service
-    - action: action_apply_service
+  - action: track_complaint_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_track_submit
+  - action: utter_track_complaint_slots
+#****************************************TRACK COMPLAINT******************************************************
+
+#****************************************SUGGESTIONS**********************************************************
+- rule: Activate Suggestion Form
+  steps:
+  - intent: suggestion
+  - action: suggestion_form
+  - active_loop: suggestion_form
+
+- rule: Submit Suggestion Form
+  condition:
+  - active_loop: suggestion_form
+  steps:
+  - action: suggestion_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_suggestion_submit
+  - action: utter_suggestion_slots
+#****************************************SUGGESTIONS**********************************************************

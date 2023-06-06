@@ -1,7 +1,7 @@
 version: "3.1"
 
 intents:
-#DEFAULT:
+#****************************************DEFAULT************************************************************
   - greet
   - goodbye
   - affirm
@@ -9,26 +9,175 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - inform
+#****************************************DEFAULT************************************************************
 
-#FOUR USE CASES:
-  - option_complaint
-  - option_track_complaint
-  - option_suggestion
-  - option_apply_service
+#****************************************RAISE_COMPLAINT****************************************************
+  - raise_complaint
+#****************************************RAISE_COMPLAINT****************************************************
 
-actions:
-#DEFAULT:
-  - action_greet
+#****************************************TRACK COMPLAINT******************************************************
+  - track_complaint
+#****************************************TRACK COMPLAINT******************************************************
 
-#FOUR USE CASES:
-  - action_complaint
-  - action_track_complaint
-  - action_suggestion
-  - action_apply_service
+#****************************************SUGGESTIONS**********************************************************
+  - suggestion
+#****************************************SUGGESTIONS**********************************************************
+entities:
+#****************************************RAISE_COMPLAINT****************************************************
+  - r_username:
+      type: regex
+      pattern: "^[a-zA-Z0-9_-]{5,25}$"
+  - r_email:
+      type: regex
+      pattern: "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+"
+  - r_location:
+      type: text
+      pattern: "^[a-zA-Z0-9_-]{5,25}$"
+  - r_complaint_details:
+      type: regex
+      pattern: "^[a-zA-Z0-9_-]{5,100}$"
+  - r_attachments:
+      type: text
+#****************************************RAISE_COMPLAINT****************************************************
 
+#****************************************TRACK COMPLAINT******************************************************
+  - t_complaint_number:
+      type: regex
+      pattern: "[A-Za-z0-9]{10}"
+  - t_comments:
+      type: regex
+      pattern: "^[a-zA-Z0-9_-]{5,100}$"
+#****************************************TRACK COMPLAINT******************************************************
+
+#****************************************SUGGESTIONS**********************************************************
+  - s_username:
+      type: regex
+      pattern: "^[a-zA-Z0-9_-]{5,25}$"
+  - s_email:
+      type: regex
+      pattern: "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+"
+  - s_location:
+      type: text
+      pattern: "^[a-zA-Z0-9_-]{5,25}$"
+  - s_complaint_details:
+      type: regex
+      pattern: "^[a-zA-Z0-9_-]{5,100}$"
+  - s_attachments:
+      type: text
+#****************************************SUGGESTIONS**********************************************************
+slots:
+#****************************************RAISE_COMPLAINT****************************************************
+  r_username:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: r_username
+  r_email:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: r_email
+  r_location:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: r_location
+  r_complaint_details:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: r_complaint_details
+  r_attachments:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: r_attachments
+#****************************************RAISE_COMPLAINT****************************************************
+
+#****************************************TRACK COMPLAINT******************************************************
+  t_complaint_number:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: t_complaint_number
+  t_comments:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: t_comments
+#****************************************TRACK COMPLAINT******************************************************
+
+#****************************************SUGGESTIONS**********************************************************
+  s_username:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: s_username
+  s_email:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: s_email
+  s_location:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: s_location
+  s_complaint_details:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: s_complaint_details
+  s_attachments:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: s_attachments
+#****************************************SUGGESTIONS**********************************************************
+
+forms:
+#****************************************RAISE_COMPLAINT****************************************************
+  raise_complaint_form:
+    required_slots:
+      - r_username
+      - r_email
+      - r_location
+      - r_complaint_details
+      - r_attachments
+#****************************************RAISE_COMPLAINT****************************************************
+
+#****************************************TRACK COMPLAINT******************************************************
+  track_complaint_form:
+    required_slots:
+      - t_complaint_number
+      - t_comments
+#****************************************TRACK COMPLAINT******************************************************
+
+#****************************************SUGGESTIONS**********************************************************
+  suggestion_form:
+    required_slots:
+      - s_username
+      - s_email
+      - s_location
+      - s_complaint_details
+      - s_attachments
+#****************************************SUGGESTIONS**********************************************************
 
 responses:
-
+#****************************************DEFAULT************************************************************
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
     image: "https://i.imgur.com/nGF1K8f.jpg"
@@ -45,11 +194,14 @@ responses:
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
 
+  utter_ask_continue:
+  - text: Are you sure you want to stop the form?
+
   utter_greet:
     - text: "Welcome to the bot! Thanks for choosing our service."
   utter_options:
     - text: "Please choose one of the following options:\n1. Raise complaint\n2. Track complaint\n3. Suggestion\n4. Apply for service"
-  utter_complaint:
+  utter_raise_complaint:
     - text: "Please provide details of your complaint."
   utter_track_complaint:
     - text: "Please provide the complaint ID to track the status."
@@ -57,7 +209,93 @@ responses:
     - text: "Please provide your suggestion or feedback."
   utter_apply_service:
     - text: "Please provide the required information to apply for the service."
+#****************************************DEFAULT************************************************************
 
+#****************************************RAISE_COMPLAINT****************************************************
+  utter_ask_r_username:
+  - text: Tell me your username?
+
+  utter_ask_r_email:
+  - text: tell me your email?
+
+  utter_ask_r_location:
+  - text: tell me your location?
+
+  utter_ask_r_complaint_details:
+  - text: tell me complaint details
+
+  utter_ask_r_attachments:
+  - text: give any attachment
+
+  utter_submit:
+  - text: I will raise a complain for you!
+
+  utter_complaint_slots:
+  - text: The slots are {r_username} {r_email} {r_location} {r_complaint_details} {r_attachments}.
+#****************************************RAISE_COMPLAINT****************************************************
+
+#****************************************TRACK COMPLAINT******************************************************
+  utter_ask_t_complaint_number:
+  - text: Give your complaint number to track
+
+  utter_ask_t_comments:
+  - text: Enter comments if any
+
+  utter_track_submit:
+  - text:  Thanks for the comments
+
+  utter_track_complaint_slots:
+  - text: The track complaint slots are {t_complaint_number} {t_comments}
+#****************************************TRACK COMPLAINT******************************************************
+
+#****************************************SUGGESTIONS**********************************************************
+  utter_ask_s_username:
+  - text: Tell me your username?
+
+  utter_ask_s_email:
+  - text: tell me your email?
+
+  utter_ask_s_location:
+  - text: tell me your location?
+
+  utter_ask_s_complaint_details:
+  - text: tell me complaint details
+
+  utter_ask_s_attachments:
+  - text: give any attachment
+  
+  utter_suggestion_submit:
+  - text: I will raise a suggestion for you!
+
+  utter_suggestion_slots:
+  - text: The slots are {s_username} {s_email} {s_location} {s_complaint_details} {s_attachments}.
+#****************************************SUGGESTIONS**********************************************************
+
+actions:
+#****************************************DEFAULT************************************************************
+- utter_ask_continue
+- utter_goodbye
+- utter_greet
+- action_greet
+#****************************************DEFAULT************************************************************
+
+#****************************************RAISE_COMPLAINT****************************************************
+- utter_complaint_slots
+- utter_submit
+- validate_raise_complaint_form
+#****************************************RAISE_COMPLAINT****************************************************
+
+#****************************************TRACK COMPLAINT******************************************************
+- utter_track_complaint_slot
+- utter_track_submit
+- validate_track_complaint_form
+#****************************************TRACK COMPLAINT******************************************************
+
+#****************************************SUGGESTIONS**********************************************************
+- utter_suggesstion_slot
+- utter_suggestion_submit
+- validate_suggesstion_form
+#****************************************SUGGESTIONS**********************************************************
 
 session_config:
   session_expiration_time: 60
