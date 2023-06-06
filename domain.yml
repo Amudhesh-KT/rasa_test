@@ -249,16 +249,16 @@ responses:
 #****************************************TRACK COMPLAINT******************************************************
 
 #****************************************SUGGESTIONS**********************************************************
-  utter_ask_s_username:
-  - text: Tell me your username?
+  # utter_ask_s_username:
+  # - text: Tell me your username?
 
-  utter_ask_s_email:
-  - text: tell me your email?
+  # utter_ask_s_email:
+  # - text: tell me your email?
 
-  utter_ask_s_location:
-  - text: tell me your location?
+  # utter_ask_s_location:
+  # - text: tell me your location?
 
-  utter_ask_s_complaint_details:
+  utter_ask_s_suggestions:
   - text: Give suggestions if any
 
   utter_ask_s_attachments:
