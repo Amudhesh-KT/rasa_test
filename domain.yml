@@ -268,7 +268,7 @@ responses:
   - text: I will raise a suggestion for you!
 
   utter_suggestion_slots:
-  - text: The slots are {r_username} {r_email} {r_location} {s_sugestions} {s_attachments}.
+  - text: The slots are {r_username} {r_email} {r_location} {s_suggestions} {s_attachments}.
 #****************************************SUGGESTIONS**********************************************************
 
 actions:
